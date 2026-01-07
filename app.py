@@ -13,7 +13,7 @@ actions = ["Reduce Resources", "Maintain Current", "Increase Resources"]
 @app.route('/')
 def home():
     # Renders the main dashboard HTML
-    return render_template('index.html')
+    return render_template('templates')
 
 @app.route('/optimize')
 def optimize():
@@ -38,3 +38,4 @@ def optimize():
 if __name__ == "__main__":
     # Ensure this is running in your terminal
     app.run(debug=True, port=5000)
+
