@@ -1,10 +1,8 @@
 from flask import Flask, render_template, jsonify
 from flask_cors import CORS
 import random
-
 app = Flask(__name__, template_folder='templates')
 CORS(app)
-
 @app.route('/')
 def index():
     # Ingu 4 spaces kandaipa irukanum
@@ -22,3 +20,4 @@ def optimize():
 
 if __name__ == '__main__':
     app.run()
+
