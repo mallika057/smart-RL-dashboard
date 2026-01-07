@@ -1,41 +1,25 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template, jsonify
 from flask_cors import CORS
-import numpy as np
 import random
 
-app = Flask(__name__)
+# Flask-ku templates folder enga irukku nu sariya solrom
+app = Flask(__name__, template_folder='templates')
 CORS(app)
 
-#the Reinforcement Learning Agent
-states = ["Low Demand", "Optimal", "High Demand"]
-actions = ["Reduce Resources", "Maintain Current", "Increase Resources"]
-
 @app.route('/')
-def home():
-    # Renders the main dashboard HTML
-    return render_template('templates')
+def index():
+    # Idhu automatic-ah templates/index.html-ai eduthu screen-la kaattum
+    return render_template('index.html')
 
-@app.route('/optimize')
+@app.route('/optimize', methods=['GET'])
 def optimize():
-    # Simulate RL process with variations to ensure a wavy chart
-    state_idx = random.randint(0, 2)
-    action_idx = random.randint(0, 2)
-    
-    # Generate varied efficiency values for the dynamic wave effect
-    base_efficiency = 88
-    random_variation = random.randint(-6, 10)
-    final_efficiency = base_efficiency + random_variation
-    
-    # Cap efficiency at 99% for realism
-    if final_efficiency > 99: final_efficiency = 99
+    # Dashboard-la chart varuvadharkana data
+    data = {
+        "cpu_usage": [random.randint(20, 80) for _ in range(10)],
+        "memory_usage": [random.randint(30, 90) for _ in range(10)],
+        "status": "Optimizing..."
+    }
+    return jsonify(data)
 
-    return jsonify({
-        "status": states[state_idx],
-        "action": actions[action_idx],
-        "efficiency": f"{final_efficiency}%"
-    })
-
-if __name__ == "__main__":
-    # Ensure this is running in your terminal
-    app.run(debug=True, port=5000)
-
+if __name__ == '__main__':
+    app.run()
