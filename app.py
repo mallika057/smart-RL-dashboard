@@ -7,11 +7,12 @@ CORS(app)
 
 @app.route('/')
 def index():
+    # Ingu 4 spaces kandaipa irukanum
     return render_template('index.html')
 
 @app.route('/optimize', methods=['GET'])
 def optimize():
-    # Ingu alignment (spaces) romba mukkiyam
+    # Ingu dictionary-ku munnadi 4 spaces irukanum
     data = {
         "cpu_usage": [random.randint(20, 80) for _ in range(10)],
         "memory_usage": [random.randint(30, 90) for _ in range(10)],
